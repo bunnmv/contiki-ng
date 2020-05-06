@@ -36,7 +36,8 @@ Engage with the community:
 
 Below are listed a series of useful commands and other tips for Contiki NG and Cooja usage focused on MacOS and Docker environment.
 
-1. MacOS adjustments for Docker usage:
+1. MacOS adjustments for Docker usage
+
    * Include in ~/.bash_profile:
     ```bash
     export CNG_PATH=<absolute-path-to-your-contiki-ng>
@@ -46,6 +47,7 @@ Below are listed a series of useful commands and other tips for Contiki NG and C
     -ti contiker/contiki-ng"
     ```
 2. MacOS adjustments XQuartz
+
    * Use this version of socat command for X11 server
     ```bash
     socat TCP-LISTEN:6000,reuseaddr,fork UNIX-CLIENT:\"$DISPLAY\" &
@@ -55,3 +57,66 @@ Below are listed a series of useful commands and other tips for Contiki NG and C
     lsof -nP -iTCP:6000 | grep LISTEN
     kill -9 $PID
     ```
+3. Run Contiker Docker
+
+   * Start **new container** and run bash
+    ```bash
+    contiker bash
+    ```
+* Start **new container** and run Cooja
+
+    ```bash
+    contiker cooja
+    ```  
+4. Usefull Docker commands
+
+   * List all Docker images in your host
+    ```bash
+    docker image ls -a
+    ```
+   * List all Docker Containers ( Containers are instances of images, you can have N containers for 1 img)
+    ```bash
+    docker container ls -a
+    ```
+    * Rename container
+    ```bash
+    docker container <CONTAINER-ID | CONTAINER-NAME> rename <NEW-NAME>
+    ```
+    * Start container
+    ```bash
+    docker container <CONTAINER-ID | CONTAINER-NAME> start
+    ```
+     * Stop container
+    ```bash
+    docker container <CONTAINER-ID | CONTAINER-NAME> stop
+    ```
+5. Run cooja on docker from its bash
+
+    * Using shortcut in home dir:
+    ```bash
+    ~/cooja
+    ```  
+    
+    * Or going to Cooja dir in contiki-ng/tools/cooja and running:
+    ```bash
+    // run cooja
+    ~/contiki-ng/tools/cooja$ ant 
+    
+    // run cooja with higher Heap memory available to Java. 
+    // Usefull for big simulations 1536M instead of 512M
+    ~/contiki-ng/tools/cooja$ ant run_bigmem 
+    
+    // run without GUI 
+    // ../../.. relates to home dir
+    // all paths are realtive paths
+    
+    ~/contiki-ng/tools/cooja$ ant run_nogui -Dargs=../../../examples/benchmarks/rpl-req-resp-modified/sim_100.csc
+    ``` 
+    
+6. Advanced Cooja Run: No GUI + increased heap mem 
+
+    * Run cooja without GUI in **Cooja DIR**:
+    ```bash
+    ~/contiki-ng/tools/cooja$ java -mx1536m -jar dist/cooja.jar -nogui="../../examples/benchmarks/rpl-req-resp-modified/sim_100.csc" -contiki="../.."
+    ```   
+    
