@@ -30,3 +30,19 @@ Engage with the community:
 
 * Gitter: https://gitter.im/contiki-ng
 * Twitter: https://twitter.com/contiki_ng
+
+
+# Marcus' notes and Contiki-NG cheat sheet 
+
+Below are listed a series of useful commands and other tips for usage in Contiki NG focused on MacOS and Docker environment.
+
+1. MacOS adjustments for Docker usage:
+   * Use this version of socat command for X11 server
+    ```bash
+    socat TCP-LISTEN:6000,reuseaddr,fork UNIX-CLIENT:\"$DISPLAY\" &
+    ```
+    * In case the port is in use kill the process and try again (if possible, if not the port has to be changed in the Docker)
+    ```bash
+    lsof -nP -iTCP:6000 | grep LISTEN
+    kill -9 $PID
+    ```
