@@ -34,9 +34,18 @@ Engage with the community:
 
 # Marcus' notes and Contiki-NG cheat sheet 
 
-Below are listed a series of useful commands and other tips for usage in Contiki NG focused on MacOS and Docker environment.
+Below are listed a series of useful commands and other tips for Contiki NG and Cooja usage focused on MacOS and Docker environment.
 
 1. MacOS adjustments for Docker usage:
+   * Include in ~/.bash_profile:
+    ```bash
+    export CNG_PATH=<absolute-path-to-your-contiki-ng>
+    alias contiker="docker run --privileged \
+    --mount type=bind,source=$CNG_PATH,destination=/home/user/contiki-ng \
+    -e DISPLAY=docker.for.mac.host.internal:0 \
+    -ti contiker/contiki-ng"
+    ```
+2. MacOS adjustments XQuartz
    * Use this version of socat command for X11 server
     ```bash
     socat TCP-LISTEN:6000,reuseaddr,fork UNIX-CLIENT:\"$DISPLAY\" &
