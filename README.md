@@ -118,5 +118,10 @@ Below are listed a series of useful commands and other tips for Contiki NG and C
     * Run cooja without GUI in **Cooja DIR**:
     ```bash
     ~/contiki-ng/tools/cooja$ java -mx1536m -jar dist/cooja.jar -nogui="../../examples/benchmarks/rpl-req-resp-modified/sim_100.csc" -contiki="../.."
-    ```   
-    
+    ```      
+7. Run command on different folder without leaving the folder
+
+    ```bash
+    ~/contiki-ng/tools/cooja$ (cd ~/contiki-ng/examples/benchmarks/rpl-req-resp-simple/ && make TARGET=cooja clean)
+
+    ```
